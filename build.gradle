@@ -1,0 +1,29 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.4.0'
+    id 'com.github.johnrengelman.shadow' version '6.0.0'
+    id 'application'
+}
+
+group 'io.github.nickacpt'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    maven { setUrl("https://repo.eclipse.org/content/groups/releases/") }
+}
+
+application {
+    mainClassName = "io.github.nickacpt.kodestripping.MainKt"
+}
+shadowJar {
+    archiveName = "kode-strip.jar"
+    manifest {
+        attributes("Main-Class": application.mainClassName)
+    }
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib"
+    implementation "com.github.ajalt:clikt:2.7.1"
+    implementation 'net.bytebuddy:byte-buddy-dep:1.10.14'
+}
